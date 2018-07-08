@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .App-logo {
@@ -27,7 +27,130 @@
   to { transform: rotate(360deg); }
 }
 
+/* MainMenu */
+.mm-header {
+  text-align: center;
+  background-color: #975c95;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
+.mm-version {
+  font-size: 0.2em;
+  color: #7c777c;
+}
+
+.mm-play-text {
+  color: white;
+  font-size: 70px;
+  line-height: 49px;
+}
+
+.mm-body {
+  text-align: center;
+  background-color: white;
+  height: 40vh;
+}
+
+.mm-congklak-text {
+  color: #975c95;
+  font-size: 70px;
+  line-height: 52px;
+  margin-bottom: 30px;
+}
+
+.btn-primary {
+  background-color: #975c95;
+  border-style: none;
+  border-radius: 5px;
+  padding: 10px 16px;
+  color: white;
+  font-size: 1.1em;
+  margin: 0px 15px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: white;
+  border: 1px solid #975c95;
+  border-radius: 5px;
+  padding: 10px 16px;
+  color: #975c95;
+  font-size: 1.1em;
+  margin: 0px 15px;
+  cursor: pointer;
+}
+
+.btn-link {
+  background: transparent;
+  color: #975c95;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-icon {
+  color: #7c777c;
+  background-color: transparent;
+  border-style: none;
+  font-size: 1.3em;
+  cursor: pointer;
+  margin: 0px 15px;
+  padding: 5px;
+}
+
+.popup {
+  background-color: white;
+  padding: 15px 30px;
+  box-shadow: 2px 2px 5px 0px lightgrey;
+  position: absolute;
+}
+
+.popup-setting {
+  bottom: 10vh;
+  left: 20px;
+}
+
+.popup-bug-report {
+  bottom: 10vh;
+  left: 100px;
+}
+
+.popup>h5 {
+  margin-bottom: 15px;
+  margin-top: 0px;
+  color: #7c777c;
+  font-weight: normal;
+}
+
+.popup div {
+  margin: 5px 0px;
+  color: #4f4c4f;
+}
+
+.popup a {
+  /*color: #4f4c4f;*/
+  text-decoration: none;
+}
+
+.popup select {
+  border-style: none;
+  /*border-bottom: 1px solid;*/
+  margin-left: 15px;
+  color: #975c95;
+}
+
+.mm-footer {
+  background-color: white;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+/* END MainMenu */
+
+/* Game */
 .house {
   width: 50px;
   height: 50px;
@@ -37,12 +160,74 @@
   cursor: pointer;
 }
 
+.house-container {
+  /*position: relative;*/
+}
+
+.storehouse-popup {
+  background-color: #975c95;
+  position: absolute;
+  display: flex;
+  padding: 0px;
+  width: fit-content;
+  font-size: 0.8em;
+  color: white;
+  border-radius: 15px;
+  top: 15vh;
+  transition-duration: 1s;
+  -webkit-transition-duration:1s;
+  opacity: 0;
+  transform:translateY(20px);
+  -ms-transform:translateY(20px); /* prefix for IE 9 */
+  -webkit-transform:translateY(20px); /* prefix for Safari and Chrome */
+  height: 0px;
+}
+
+.storehouse-popup.show {
+  opacity: 1;
+  transform:translateY(0px);
+  -ms-transform:translateY(0px); /* prefix for IE 9 */
+  -webkit-transform:translateY(0px); /* prefix for Safari and Chrome */
+  height: inherit;
+  padding: 15px;
+}
+
+.black-storehouse {
+  right: 18%;
+}
+
+.white-storehouse {
+  left: 19%;
+}
+
 .white-house {
   background: #99bbef;
+  opacity: 0.5;
+}
+
+.white-house.white-next {
+  opacity: 1.0;
+}
+
+.white-house.storehouse {
+  position: absolute;
+  top: 20vh;
+  left: 15%;
 }
 
 .black-house {
   background: #f7b0d1;
+  opacity: 1.0;
+}
+
+.black-house.white-next {
+  opacity: 0.5;
+}
+
+.black-house.storehouse {
+  position: absolute;
+  top: 20vh;
+  right: 30%;
 }
 
 .house.storehouse {
@@ -58,3 +243,5 @@
 .is-travelled {
   border: 1px dashed black;
 }
+
+/* END Game */
