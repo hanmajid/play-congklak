@@ -39,7 +39,7 @@ class Game extends Component {
       selections: Array(16).fill(false),
       travels: Array(16).fill(false),
       whiteIsNext: true,
-      message: "",
+      message: this.props.texts.welcome,
       isPlaying: false,
       stops: Array(16).fill(false),
     };
@@ -52,27 +52,27 @@ class Game extends Component {
     // check if it's your turn
     if(i === 7 || i === 15) {
       this.setState({
-        message: "You can't select a storehouse",
+        message: this.props.texts.youCantSelectStorehouse,
       });
       return;
     }
     // check if it's your turn
     if(this.state.whiteIsNext && i > 7) {
       this.setState({
-        message: "You can't select your opponent's houses",
+        message: this.props.texts.youCantSelectOpponentHouse,
       });
       return;
     }
     if(!this.state.whiteIsNext && i < 8) {
       this.setState({
-        message: "You can't select your opponent's houses",
+        message: this.props.texts.youCantSelectOpponentHouse,
       });
       return;
     }
     // check if the house has no beans
     if(!this.state.houses[i]) {
       this.setState({
-        message: "You can't select an empty house",
+        message: this.props.texts.youCantSelectEmptyHouse,
       });
       return;
     }
@@ -140,13 +140,13 @@ class Game extends Component {
         if(!this.checkCanMove() && !this.checkOpponentCanMove()) {
           let message;
           if(this.state.houses[7] > this.state.houses[15]) {
-            message = "You win!";
+            message = this.props.texts.youWin;
           }
           else if(this.state.houses[7] < this.state.houses[15]) {
-            message = "Your opponent win!";
+            message = this.props.texts.youLose;
           }
           else {
-            message = "It's a draw!";
+            message = this.props.texts.itsDraw;
           }
           this.setState({
             message: message
@@ -158,13 +158,13 @@ class Game extends Component {
           this.setState({
             stops: stops,
             isPlaying: false,
-            message: "You get another turn",
+            message: this.props.texts.youGetAnotherTurn,
           });
         }
         else {
           this.setState({
             isPlaying: false,
-            message: "You can't move. Your opponent's turn again",
+            message: this.props.texts.youCantMove,
             whiteIsNext: !this.state.whiteIsNext,
           }); 
         }
@@ -174,13 +174,13 @@ class Game extends Component {
         if(!this.checkCanMove() && !this.checkOpponentCanMove()) {
           let message;
           if(this.state.houses[7] > this.state.houses[15]) {
-            message = "You win!";
+            message = this.props.texts.youWin;
           }
           else if(this.state.houses[7] < this.state.houses[15]) {
-            message = "Your opponent win!";
+            message = this.props.texts.youLose;
           }
           else {
-            message = "It's a draw!";
+            message = this.props.texts.itsDraw;
           }
           this.setState({
             message: message
@@ -192,13 +192,13 @@ class Game extends Component {
           this.setState({
             stops: stops,
             isPlaying: false,
-            message: "Your opponent get another turn",
+            message: this.props.texts.opponentGetAnotherTurn,
           });
         }
         else {
           this.setState({
             isPlaying: false,
-            message: "Your opponent can't move. Your turn again",
+            message: this.props.texts.opponentCantMove,
             whiteIsNext: !this.state.whiteIsNext,
           }); 
         }
@@ -217,7 +217,7 @@ class Game extends Component {
           houses[whiteBeans[k]] = 0;
           this.setState({
             houses: houses,
-            message: "You take the opposing house's beans",
+            message: this.props.texts.youTakeBeans,
           }, () => {
             this.changeTurn();
           }); 
@@ -228,7 +228,7 @@ class Game extends Component {
           houses[blackBeans[k]] = 0;
           this.setState({
             houses: houses,
-            message: "Your opponent take the opposing house's beans",
+            message: this.props.texts.opponentTakeBeans,
           }, () => {
             this.changeTurn();
           }); 
@@ -251,25 +251,25 @@ class Game extends Component {
     if(this.state.whiteIsNext && !opponentCanMove) {
       this.setState({
         isPlaying: false,
-        message: "Opponent can't move. Your turn again"
+        message: this.props.texts.opponentCantMove
       });
     }
     else if(!this.state.whiteIsNext && !canMove) {
       this.setState({
         isPlaying: false,
-        message: "You can't move. Your opponent's turn again"
+        message: this.props.texts.youCantMove
       }); 
     }
     else if(!opponentCanMove && !canMove) {
       let message;
       if(this.state.houses[7] > this.state.houses[15]) {
-        message = "You win!";
+        message = this.props.texts.youWin;
       }
       else if(this.state.houses[7] > this.state.houses[15]) {
-        message = "Your opponent win!";
+        message = this.props.texts.youLose;
       }
       else {
-        message = "It's a draw!";
+        message = this.props.texts.itsDraw;
       }
       this.setState({
         message: message
@@ -399,7 +399,7 @@ class Game extends Component {
             <div>
               {this.props.texts.bugDescription}
               <div>
-                <textarea rows="5" cols="75" />
+                <textarea rows="5" cols="75" value={this.props.bugReportDesc} onChange={this.props.onChangeBugReportDesc} />
               </div>
               <button className="btn-primary" onClick={this.props.onClickSubmitBug}>{this.props.texts.submit}</button>
               {(

@@ -18,7 +18,7 @@ class MainMenu extends Component {
           <button className="btn-icon" onClick={this.props.onClickSettings}><FontAwesome.FaCog /></button>
         </div>
         {(this.props.isOpenSetting ? 
-          <div className="popup-setting">
+          <div className="popup popup-setting">
             <h5>{this.props.texts.settings}</h5>
             <div>
               {this.props.texts.language}

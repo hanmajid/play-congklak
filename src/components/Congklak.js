@@ -3,20 +3,21 @@ import logo from './logo.svg';
 import Game from './Game.js';
 import MainMenu from './MainMenu.js'
 
-import './App.css';
+import './Congklak.css';
 
-class App extends Component {
+class Congklak extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isMainMenu: false,
+      isMainMenu: true,
       isOpenSetting: false,
       isOpenBugReport: false,
       isOpenModalAbout: false,
       isBugSubmitted: false,
       language: "English",
       dropSpeed: 100,
-      version: "alpha",
+      version: "1.0a",
+      bugReportDesc: "",
     };
   }
 
@@ -28,10 +29,8 @@ class App extends Component {
   }
 
   handleClickInstructions() {
-    this.setState({
-      isOpenSetting: false,
-      isOpenModalAbout: true,
-    });
+    let win = window.open("https://www.wikihow.com/Play-Congkak", "_blank");
+    win.focus();
   }
 
   handleChangeDropSpeed(e) {
@@ -56,9 +55,36 @@ class App extends Component {
     });  
   }
 
+  handleChangeBugReportDesc(e) {
+    this.setState({
+      bugReportDesc: e.target.value
+    });
+  }
+
   handleClickSubmitBug(e) {
+    var details = {
+        'description': this.state.bugReportDesc,
+    };
+
+    var formBody = [];
+    for (var property in details) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(details[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+
+    fetch('https://hanmajid.com/api/play-congklak/bug-report', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      },
+      body: formBody
+    });
+
     this.setState({
       isBugSubmitted: true,
+      bugReportDesc: ""
     });  
   }
 
@@ -80,6 +106,9 @@ class App extends Component {
     }
     return (
       <div className="App">
+        {
+          <div></div>
+        }
         {(this.state.isMainMenu ?
           <MainMenu
             version={this.state.version}
@@ -97,6 +126,7 @@ class App extends Component {
             texts={texts}
             language={this.state.language} 
             dropSpeed={this.state.dropSpeed}
+            bugReportDesc={this.state.bugReportDesc}
             isOpenSetting={this.state.isOpenSetting}
             isOpenBugReport={this.state.isOpenBugReport}
             isBugSubmitted={this.state.isBugSubmitted}
@@ -105,6 +135,7 @@ class App extends Component {
             onChangeDropSpeed={(e) => this.handleChangeDropSpeed(e)} 
             onClickFindBug={(e) => this.handleClickFindBug(e)}
             onClickSubmitBug={(e) => this.handleClickSubmitBug(e)}
+            onChangeBugReportDesc={(e) => this.handleChangeBugReportDesc(e)}
           />
         )}
       </div>
@@ -134,6 +165,20 @@ const englishTexts = {
   "gameHeader": "PLAY CONGKLAK",
   "yourTurn": "Your Turn",
   "opponentTurn": "Opponent's Turn",
+
+  "youCantSelectStorehouse": "You can't select a storehouse",
+  "youCantSelectOpponentHouse": "You can't select your opponent's houses",
+  "youCantSelectEmptyHouse": "You can't select an empty house",
+  "youWin": "You win! Thanks for playing!",
+  "youLose": "You lose! Thanks for playing!",
+  "itsDraw": "It's a draw! Thanks for playing!",
+  "youGetAnotherTurn": "You get another turn",
+  "youCantMove": "You can't move. It's your opponent's turn again",
+  "opponentGetAnotherTurn": "Your opponent get another turn",
+  "opponentCantMove": "Your opponent can't move. Your turn again",
+  "youTakeBeans": "You take the opposing house's beans",
+  "opponentTakeBeans": "Your opponent take the opposing house's beans",
+  "welcome": "Let's play!",
 }
 
 const bahasaTexts = {
@@ -158,6 +203,20 @@ const bahasaTexts = {
   "gameHeader": "MAIN CONGKLAK",
   "yourTurn": "Giliran Anda",
   "opponentTurn": "Giliran Lawan",
+
+  "youCantSelectStorehouse": "Anda tidak bisa memilih 'rumah besar'",
+  "youCantSelectOpponentHouse": "Anda tidak bisa memilih 'rumah' lawan",
+  "youCantSelectEmptyHouse": "Anda tidak bisa memilih 'rumah' kosong",
+  "youWin": "Anda menang! Terima kasih sudah bermain!",
+  "youLose": "Anda kalah! Terima kasih sudah bermain!",
+  "itsDraw": "Seri! Terima kasih sudah bermain!",
+  "youGetAnotherTurn": "Anda dapat giliran lagi",
+  "youCantMove": "Anda tidak bisa jalan. Giliran lawan lagi",
+  "opponentGetAnotherTurn": "Lawan dapat giliran lagi",
+  "opponentCantMove": "Lawan tidak bisa jalan. Giliran Anda lagi",
+  "youTakeBeans": "Anda mengambil biji lawan yang bersebrangan",
+  "opponentTakeBeans": "Lawan mengambil biji Anda yang bersebrangan",
+  "welcome": "Selamat bermain!",
 }
 
-export default App;
+export default Congklak;
