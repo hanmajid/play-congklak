@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import Game from './Game.js';
 import MainMenu from './MainMenu.js'
@@ -179,6 +180,8 @@ const englishTexts = {
   "youTakeBeans": "You take the opposing house's beans",
   "opponentTakeBeans": "Your opponent take the opposing house's beans",
   "welcome": "Let's play!",
+  "youEnterStorehouse": "You enter storehouse!",
+  "opponentEnterStorehouse": "Your opponent enters storehouse!",
 }
 
 const bahasaTexts = {
@@ -217,6 +220,8 @@ const bahasaTexts = {
   "youTakeBeans": "Anda mengambil biji lawan yang bersebrangan",
   "opponentTakeBeans": "Lawan mengambil biji Anda yang bersebrangan",
   "welcome": "Selamat bermain!",
+  "youEnterStorehouse": "Anda masuk 'rumah besar'!",
+  "opponentEnterStorehouse": "Lawan masuk 'rumah besar'!",
 }
 
 export default Congklak;

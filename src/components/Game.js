@@ -311,6 +311,7 @@ class Game extends Component {
           isSelected={this.state.selections[i]}
           isStop={this.state.stops[i]}
           isTravelled={this.state.travels[i]}
+          texts={this.props.texts}
           onClick={() => this.handleClick(i) } />
       );
     }
@@ -326,6 +327,7 @@ class Game extends Component {
           isStop={this.state.stops[i]}
           isTravelled={this.state.travels[i]}
           isStorehouse={ i === 15 ? true : false}
+          texts={this.props.texts}
           onClick={() => this.handleClick(i) } />
       );
     }

@@ -24,7 +24,7 @@ class House extends Component {
 	      	<span 
 	      		className={"storehouse-popup " + (this.props.isStop ? "show " : " ") + (this.props.isWhite ? "white-storehouse" : "black-storehouse")}
 	      	>
-	      		{this.props.isWhite ? "You enter storehouse!" : "Your opponent enters storehouse!"}
+	      		{this.props.isWhite ? this.props.texts.youEnterStorehouse : this.props.texts.opponentEnterStorehouse}
 	      	</span>
 	      	:
 	      	<span></span>
